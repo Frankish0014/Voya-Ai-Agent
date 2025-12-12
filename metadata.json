@@ -1,0 +1,9 @@
+{
+  "name": "Voya",
+  "description": "A global multimodal travel assistant helping users find and book meals, stays, and services anywhere in the world using real-time search and AI reasoning.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
