@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { GoogleGenAI } from "@google/genai";
 
@@ -18,18 +19,23 @@ const GenMode: React.FC<GenModeProps> = ({ apiKey: defaultApiKey }) => {
     setError(null);
     setGeneratedImage(null);
 
+    // Logic: Use 'gemini-2.5-flash-image' for 1K (Free tier friendly).
+    // Use 'gemini-3-pro-image-preview' for 2K/4K (Requires Billing/Paid Key).
+    const isHighRes = imageSize === '2K' || imageSize === '4K';
+    const modelName = isHighRes ? 'gemini-3-pro-image-preview' : 'gemini-2.5-flash-image';
+
     try {
-      // Ensure we check for a user-selected key first, as strictly required for this model
-      const aistudio = (window as any).aistudio;
-      if (aistudio) {
-        const hasKey = await aistudio.hasSelectedApiKey();
-        if (!hasKey) {
-            await aistudio.openSelectKey();
+      // Only strictly enforce key selection for the Pro model as per requirements
+      if (isHighRes) {
+        const aistudio = (window as any).aistudio;
+        if (aistudio) {
+            const hasKey = await aistudio.hasSelectedApiKey();
+            if (!hasKey) {
+                await aistudio.openSelectKey();
+            }
         }
       }
       
-      // CRITICAL FIX: Always read process.env.API_KEY to get the latest selected key.
-      // The prop 'defaultApiKey' might be stale if the user just selected a new key in the dialog.
       const apiKeyToUse = process.env.API_KEY || defaultApiKey;
       
       if (!apiKeyToUse) {
@@ -38,17 +44,24 @@ const GenMode: React.FC<GenModeProps> = ({ apiKey: defaultApiKey }) => {
 
       const ai = new GoogleGenAI({ apiKey: apiKeyToUse });
       
+      // Construct config based on model capabilities
+      const config: any = {
+        imageConfig: {
+            aspectRatio: '1:1'
+        }
+      };
+
+      // imageSize is only supported by the Pro Image Preview model
+      if (isHighRes) {
+          config.imageConfig.imageSize = imageSize;
+      }
+      
       const response = await ai.models.generateContent({
-        model: 'gemini-3-pro-image-preview',
+        model: modelName,
         contents: [
             { role: 'user', parts: [{ text: prompt }] }
         ],
-        config: {
-          imageConfig: {
-            imageSize: imageSize,
-            aspectRatio: '1:1'
-          }
-        }
+        config: config
       });
 
       let foundImage = false;
@@ -67,7 +80,6 @@ const GenMode: React.FC<GenModeProps> = ({ apiKey: defaultApiKey }) => {
       }
 
       if (!foundImage) {
-          // Check for safety finish reason if available
           const finishReason = response.candidates?.[0]?.finishReason;
           if (finishReason) {
               setError(`Generation blocked by safety filters (${finishReason}). Try a different prompt.`);
@@ -79,17 +91,53 @@ const GenMode: React.FC<GenModeProps> = ({ apiKey: defaultApiKey }) => {
     } catch (err: any) {
       console.error("Image Gen Error:", err);
       
-      // Handle specific error cases
-      if (err.message && err.message.includes("Requested entity was not found")) {
-          const aistudio = (window as any).aistudio;
-          if (aistudio) await aistudio.openSelectKey();
-          setError("API Key invalid or expired. Please try again.");
-      } else if (err.message) {
-          // Display the actual error message from the API for better debugging
-          setError(`Error: ${err.message}`);
-      } else {
-          setError("Failed to generate image. Please check your connection and try again.");
+      let errorMessage = err.message || "An unknown error occurred";
+
+      // Parse JSON error if present
+      if (errorMessage.includes('{"error":')) {
+          try {
+              const jsonStart = errorMessage.indexOf('{');
+              const jsonEnd = errorMessage.lastIndexOf('}') + 1;
+              const jsonStr = errorMessage.substring(jsonStart, jsonEnd);
+              const parsed = JSON.parse(jsonStr);
+              if (parsed.error && parsed.error.message) {
+                  errorMessage = parsed.error.message;
+              }
+          } catch (e) {
+              // Ignore parse error
+          }
       }
+
+      // Handle Permission Denied
+      if (
+          errorMessage.includes("PERMISSION_DENIED") || 
+          errorMessage.includes("403") || 
+          errorMessage.includes("The caller does not have permission") ||
+          errorMessage.includes("Requested entity was not found")
+      ) {
+          // If we failed on High Res, suggest switching to 1K
+          if (isHighRes) {
+               setError("High-resolution generation requires a paid API key. Try switching to '1K' quality for free generation.");
+               // Attempt to open key selector
+               const aistudio = (window as any).aistudio;
+               if (aistudio) {
+                   try { await aistudio.openSelectKey(); } catch(e) {}
+               }
+               return;
+          } else {
+               // If we failed on standard, still try to prompt for key
+               const aistudio = (window as any).aistudio;
+               if (aistudio) {
+                   try { 
+                       await aistudio.openSelectKey(); 
+                       setError("Permission denied. Please select a valid API Key.");
+                       return;
+                   } catch(e) {}
+               }
+          }
+      }
+
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -117,7 +165,12 @@ const GenMode: React.FC<GenModeProps> = ({ apiKey: defaultApiKey }) => {
               </div>
 
               <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Quality</label>
+                  <div className="flex items-center justify-between mb-3">
+                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider">Quality</label>
+                    <span className="text-[10px] text-slate-400 bg-slate-200 px-2 py-0.5 rounded-full">
+                        {imageSize === '1K' ? 'Free Tier' : 'Pro (Paid)'}
+                    </span>
+                  </div>
                   <div className="grid grid-cols-3 gap-3">
                     {(['1K', '2K', '4K'] as const).map((size) => (
                         <button

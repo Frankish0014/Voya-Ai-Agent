@@ -213,13 +213,29 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ itemName, priceEstimate, 
                 <div className="grid grid-cols-2 gap-3">
                     <div>
                         <label className="text-xs text-slate-500 block mb-1">Check-in</label>
-                        <input type="date" className={`w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none`}
-                            onChange={(e) => setCheckIn(e.target.value)} />
+                        <div className="relative">
+                            <input 
+                                type="date" 
+                                className={`w-full bg-slate-50 border border-slate-200 rounded-lg pl-3 pr-10 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none [&::-webkit-calendar-picker-indicator]:opacity-0 cursor-pointer`}
+                                onChange={(e) => setCheckIn(e.target.value)} 
+                            />
+                            <svg className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 ${themeClasses.text} pointer-events-none`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
                     </div>
                     <div>
                         <label className="text-xs text-slate-500 block mb-1">Check-out</label>
-                        <input type="date" className={`w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none`}
-                            onChange={(e) => setCheckOut(e.target.value)} />
+                        <div className="relative">
+                            <input 
+                                type="date" 
+                                className={`w-full bg-slate-50 border border-slate-200 rounded-lg pl-3 pr-10 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none [&::-webkit-calendar-picker-indicator]:opacity-0 cursor-pointer`}
+                                onChange={(e) => setCheckOut(e.target.value)} 
+                            />
+                            <svg className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 ${themeClasses.text} pointer-events-none`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             )}
@@ -229,13 +245,30 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ itemName, priceEstimate, 
                 <div className="grid grid-cols-2 gap-3">
                     <div>
                         <label className="text-xs text-slate-500 block mb-1">Date</label>
-                        <input type="date" className={`w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none`}
-                            onChange={(e) => setDate(e.target.value)} />
+                        <div className="relative">
+                            <input 
+                                type="date" 
+                                className={`w-full bg-slate-50 border border-slate-200 rounded-lg pl-3 pr-10 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none [&::-webkit-calendar-picker-indicator]:opacity-0 cursor-pointer`}
+                                onChange={(e) => setDate(e.target.value)} 
+                            />
+                            <svg className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 ${themeClasses.text} pointer-events-none`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
                     </div>
                     <div>
                         <label className="text-xs text-slate-500 block mb-1">Time</label>
-                        <input type="time" value={time} className={`w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none`}
-                            onChange={(e) => setTime(e.target.value)} />
+                        <div className="relative">
+                            <input 
+                                type="time" 
+                                value={time} 
+                                className={`w-full bg-slate-50 border border-slate-200 rounded-lg pl-3 pr-10 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none [&::-webkit-calendar-picker-indicator]:opacity-0 cursor-pointer`}
+                                onChange={(e) => setTime(e.target.value)} 
+                            />
+                            <svg className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 ${themeClasses.text} pointer-events-none`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             )}
@@ -261,8 +294,16 @@ const BookingWidget: React.FC<BookingWidgetProps> = ({ itemName, priceEstimate, 
                 <div className="space-y-3">
                     <div>
                          <label className="text-xs text-slate-500 block mb-1">Date</label>
-                        <input type="date" className={`w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none`}
-                            onChange={(e) => setDate(e.target.value)} />
+                        <div className="relative">
+                            <input 
+                                type="date" 
+                                className={`w-full bg-slate-50 border border-slate-200 rounded-lg pl-3 pr-10 py-2 text-sm focus:ring-2 ${themeClasses.border} outline-none [&::-webkit-calendar-picker-indicator]:opacity-0 cursor-pointer`}
+                                onChange={(e) => setDate(e.target.value)} 
+                            />
+                            <svg className={`absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 ${themeClasses.text} pointer-events-none`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
                     </div>
                     <div>
                         <label className="text-xs text-slate-500 block mb-1">Request Details</label>
@@ -383,9 +424,7 @@ const parseBold = (text: string) => {
 };
 
 const Home: React.FC<HomeProps> = ({ apiKey }) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: 'Welcome to **Voya**. \nI can help you find and book meals, stays, and services across Africa and the world.\n\n* "Order Jollof Rice via Jumia Food"\n* "Book a table at Slow Kigali"\n* "Find a hotel in Lagos"\n\n I am here to help you!' }
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -425,7 +464,7 @@ const Home: React.FC<HomeProps> = ({ apiKey }) => {
     try {
       const ai = new GoogleGenAI({ apiKey });
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3-pro-preview',
         contents: [
             { role: 'user', parts: [{ text: `History: ${JSON.stringify(messages.slice(-6))}\nUser Request: ${userMsg.text}` }] }
         ],
@@ -475,7 +514,7 @@ const Home: React.FC<HomeProps> = ({ apiKey }) => {
 
   const QuickActionChip = ({ icon, label, action }: { icon: React.ReactNode, label: string, action: string }) => (
     <button 
-      onClick={() => setInputValue(action)} 
+      onClick={() => handleSendMessage(action)} 
       className="flex items-center space-x-2 px-4 py-2 bg-white/60 backdrop-blur-sm border border-white/40 rounded-full shadow-sm hover:bg-white hover:shadow-md hover:border-brand-200 transition-all duration-300 group whitespace-nowrap flex-shrink-0"
     >
       <span className="text-slate-400 group-hover:text-brand-500 transition-colors duration-300">{icon}</span>
@@ -554,66 +593,106 @@ const Home: React.FC<HomeProps> = ({ apiKey }) => {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-8 custom-scrollbar">
-        {messages.map((msg, idx) => (
-          <div key={idx} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-slide-up`}>
-            {/* Model Icon */}
-            {msg.role === 'model' && (
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-blue-500 flex items-center justify-center text-white shadow-md flex-shrink-0 mr-3 mt-1">
-                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-              </div>
-            )}
-            
-            <div className={`max-w-[85%] md:max-w-[75%] rounded-2xl ${
-              msg.role === 'user' 
-                ? 'bg-slate-850 text-white rounded-br-sm px-6 py-4' 
-                : 'bg-white text-slate-600 rounded-bl-sm border border-slate-100 shadow-sm px-6 py-4'
-            }`}>
-              {/* Normal Text Content */}
-              {msg.text && <FormattedText text={msg.text} />}
-
-              {/* Booking Widget (Rendered if payload exists) */}
-              {msg.bookingPayload && (
-                  <div className="mt-4">
-                      <BookingWidget 
-                          category={msg.bookingPayload.category}
-                          itemName={msg.bookingPayload.itemName} 
-                          priceEstimate={msg.bookingPayload.priceEstimate} 
-                      />
-                  </div>
-              )}
-              
-              {/* Grounding Sources with Book Buttons */}
-              {msg.groundingMetadata?.groundingChunks && (
-                <div className="mt-4 pt-3 border-t border-slate-100">
-                  <div className="text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Suggestions</div>
-                  <div className="flex flex-col space-y-2">
-                    {msg.groundingMetadata.groundingChunks.map((chunk: any, i: number) => {
-                       if (chunk.web?.title) {
-                           return (
-                               <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100 hover:border-brand-200 transition-colors">
-                                   <a href={chunk.web.uri} target="_blank" rel="noreferrer" className="text-sm text-brand-600 hover:underline truncate max-w-[200px] sm:max-w-xs font-medium block">
-                                       {chunk.web.title}
-                                   </a>
-                                   <button 
-                                      onClick={() => handleSendMessage(`Book ${chunk.web.title}`)}
-                                      className="ml-2 px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-md hover:bg-brand-600 transition-colors"
-                                   >
-                                       Book
-                                   </button>
-                               </div>
-                           )
-                       }
-                       return null;
-                    })}
-                  </div>
+      <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-8 custom-scrollbar relative">
+        {messages.length === 0 ? (
+           <div className="absolute inset-0 flex flex-col items-center justify-center p-4 animate-fade-in z-0">
+               <div className="w-20 h-20 bg-gradient-to-br from-brand-50 to-white rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center mb-6">
+                  <svg className="w-10 h-10 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+               </div>
+               <h1 className="text-3xl font-bold text-slate-900 mb-3 tracking-tight">How can I help you?</h1>
+               <p className="text-slate-500 text-center max-w-md mb-10 leading-relaxed">
+                  I'm Voya. Ask me to book hotels, find restaurants, order delivery, or plan your trip.
+               </p>
+               
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+                   {[
+                       { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Book a Stay", sub: "Hotels in Kigali under $100", query: "Find me hotels in Kigali under $100" },
+                       { icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z", label: "Local Dining", sub: "Top rated restaurants nearby", query: "What are the top rated restaurants nearby?" },
+                       { icon: "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z", label: "Order Food", sub: "Delivery from Nando's", query: "I want to order delivery from Nando's" },
+                       { icon: "M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7", label: "Trip Plan", sub: "3-day itinerary for Cape Town", query: "Create a 3-day itinerary for Cape Town" }
+                   ].map((item, i) => (
+                       <button 
+                          key={i} 
+                          onClick={() => handleSendMessage(item.query)}
+                          className="flex items-center p-4 bg-white border border-slate-200 rounded-2xl hover:border-brand-400 hover:shadow-md hover:bg-brand-50/30 transition-all duration-300 group text-left"
+                       >
+                          <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center mr-4 group-hover:bg-white group-hover:shadow-sm transition-all">
+                              <svg className="w-6 h-6 text-slate-400 group-hover:text-brand-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                              </svg>
+                          </div>
+                          <div>
+                              <span className="block font-semibold text-slate-900 group-hover:text-brand-700 transition-colors">{item.label}</span>
+                              <span className="block text-xs text-slate-500 mt-0.5">{item.sub}</span>
+                          </div>
+                       </button>
+                   ))}
+               </div>
+           </div>
+        ) : (
+          messages.map((msg, idx) => (
+            <div key={idx} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'} animate-slide-up relative z-10`}>
+              {/* Model Icon */}
+              {msg.role === 'model' && (
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-blue-500 flex items-center justify-center text-white shadow-md flex-shrink-0 mr-3 mt-1">
+                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                 </div>
               )}
+              
+              <div className={`max-w-[85%] md:max-w-[75%] rounded-2xl ${
+                msg.role === 'user' 
+                  ? 'bg-slate-850 text-white rounded-br-sm px-6 py-4' 
+                  : 'bg-white text-slate-600 rounded-bl-sm border border-slate-100 shadow-sm px-6 py-4'
+              }`}>
+                {/* Normal Text Content */}
+                {msg.text && <FormattedText text={msg.text} />}
+
+                {/* Booking Widget (Rendered if payload exists) */}
+                {msg.bookingPayload && (
+                    <div className="mt-4">
+                        <BookingWidget 
+                            category={msg.bookingPayload.category}
+                            itemName={msg.bookingPayload.itemName} 
+                            priceEstimate={msg.bookingPayload.priceEstimate} 
+                        />
+                    </div>
+                )}
+                
+                {/* Grounding Sources with Book Buttons */}
+                {msg.groundingMetadata?.groundingChunks && (
+                  <div className="mt-4 pt-3 border-t border-slate-100">
+                    <div className="text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-wide">Suggestions</div>
+                    <div className="flex flex-col space-y-2">
+                      {msg.groundingMetadata.groundingChunks.map((chunk: any, i: number) => {
+                         if (chunk.web?.title) {
+                             return (
+                                 <div key={i} className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-100 hover:border-brand-200 transition-colors">
+                                     <a href={chunk.web.uri} target="_blank" rel="noreferrer" className="text-sm text-brand-600 hover:underline truncate max-w-[200px] sm:max-w-xs font-medium block">
+                                         {chunk.web.title}
+                                     </a>
+                                     <button 
+                                        onClick={() => handleSendMessage(`Book ${chunk.web.title}`)}
+                                        className="ml-2 px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-md hover:bg-brand-600 transition-colors"
+                                     >
+                                         Book
+                                     </button>
+                                 </div>
+                             )
+                         }
+                         return null;
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
+        
         {isLoading && (
-          <div className="flex justify-start animate-fade-in">
+          <div className="flex justify-start animate-fade-in relative z-10">
              <div className="w-8 h-8 mr-3" /> {/* Spacer for icon alignment */}
              <div className="bg-white border border-slate-100 rounded-2xl rounded-bl-sm px-5 py-3 flex items-center space-x-2 shadow-sm">
                 <div className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -631,19 +710,19 @@ const Home: React.FC<HomeProps> = ({ apiKey }) => {
             {/* Quick Actions */}
             <div className="flex gap-3 overflow-x-auto no-scrollbar pb-1">
                 <QuickActionChip 
-                    icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>}
-                    label="Food Nearby"
-                    action="Find highly rated restaurants nearby"
+                    icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-3m-6 0h6" /></svg>}
+                    label="Hotels in Kigali"
+                    action="Find affordable hotels in Kigali for 2 nights"
                 />
                 <QuickActionChip 
-                    icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-3m-6 0h6" /></svg>}
-                    label="Luxury Stays"
-                    action="Find 5-star hotels in the city center"
+                    icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>}
+                    label="Nairobi Dining"
+                    action="Recommend restaurants in Nairobi with great ambience"
                 />
                 <QuickActionChip 
                     icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>}
-                    label="Plan Trip"
-                    action="Create a 3-day itinerary for this location"
+                    label="Cape Town Plan"
+                    action="Create a 3-day itinerary for Cape Town"
                 />
             </div>
 
@@ -654,7 +733,7 @@ const Home: React.FC<HomeProps> = ({ apiKey }) => {
                     <input
                         type="text"
                         className="flex-1 bg-transparent px-6 py-3 text-slate-800 placeholder-slate-400 focus:outline-none text-base"
-                        placeholder="Ask Voya... (e.g., 'Book Uber Eats')"
+                        placeholder="Ask Voya... (e.g., 'Hotels in Lagos', 'Order Pizza')"
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
